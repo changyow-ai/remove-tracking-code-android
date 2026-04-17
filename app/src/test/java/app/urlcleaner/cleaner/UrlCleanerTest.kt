@@ -58,6 +58,16 @@ class UrlCleanerTest {
         assertTrue("got ${r.cleaned}", r.cleaned.startsWith("https://example.com/article"))
     }
 
+    @Test fun `cleans threads xmt and slof`() {
+        val r = cleaner.clean("https://www.threads.com/@u/post/X?xmt=AQABCDEF&slof=1")
+        assertEquals("https://www.threads.com/@u/post/X", r.cleaned)
+    }
+
+    @Test fun `cleans threads net alternate tld`() {
+        val r = cleaner.clean("https://www.threads.net/@u/post/X?xmt=abc")
+        assertEquals("https://www.threads.net/@u/post/X", r.cleaned)
+    }
+
     @Test fun `cleans tiktok params`() {
         val r = cleaner.clean("https://www.tiktok.com/@user/video/123?_r=1&_t=abc&is_copy_url=1")
         assertFalse(r.cleaned.contains("_r="))
@@ -139,8 +149,9 @@ class UrlCleanerTest {
         @JvmStatic
         @BeforeClass
         fun loadRules() {
-            val json = File("src/main/assets/clearurls-rules.json").readText()
-            ruleSet = RulesParser.parse(json)
+            val main = RulesParser.parse(File("src/main/assets/clearurls-rules.json").readText())
+            val supp = RulesParser.parse(File("src/main/assets/supplemental-rules.json").readText())
+            ruleSet = RuleSet(main.providers + supp.providers)
             cleaner = UrlCleaner(ruleSet)
             require(ruleSet.providers.isNotEmpty()) { "rules failed to load" }
         }

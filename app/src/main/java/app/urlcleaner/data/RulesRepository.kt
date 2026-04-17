@@ -14,6 +14,10 @@ import java.security.MessageDigest
  * Loads ClearURLs rules in this order:
  *   1. app-private cache (`filesDir/rules.json`) if it exists
  *   2. bundled asset (`assets/clearurls-rules.json`)
+ * Then merges a small [SUPPLEMENTAL_ASSET] on top so we can ship rules for sites
+ * ClearURLs doesn't cover yet (e.g. threads.com). Supplemental rules are never
+ * overwritten by network updates.
+ *
  * And updates the cache on demand via [updateFromNetwork].
  */
 class RulesRepository(private val context: Context) {
@@ -29,12 +33,22 @@ class RulesRepository(private val context: Context) {
     }
 
     suspend fun load(): LoadedRules = withContext(Dispatchers.IO) {
-        val json = if (cacheFile.exists()) {
+        val (mainJson, label) = if (cacheFile.exists()) {
             cacheFile.readText() to "cache"
         } else {
-            context.assets.open(ASSET_NAME).bufferedReader().use { it.readText() } to "bundled"
+            context.assets.open(MAIN_ASSET).bufferedReader().use { it.readText() } to "bundled"
         }
-        LoadedRules(RulesParser.parse(json.first), json.second)
+        val supplementalJson = runCatching {
+            context.assets.open(SUPPLEMENTAL_ASSET).bufferedReader().use { it.readText() }
+        }.getOrNull()
+        val merged = RulesParser.parse(mainJson)
+        val combined = if (supplementalJson != null) {
+            val extra = RulesParser.parse(supplementalJson)
+            RuleSet(merged.providers + extra.providers)
+        } else {
+            merged
+        }
+        LoadedRules(combined, label)
     }
 
     suspend fun updateFromNetwork(): UpdateResult = withContext(Dispatchers.IO) {
@@ -69,7 +83,8 @@ class RulesRepository(private val context: Context) {
     }
 
     companion object {
-        private const val ASSET_NAME = "clearurls-rules.json"
+        private const val MAIN_ASSET = "clearurls-rules.json"
+        private const val SUPPLEMENTAL_ASSET = "supplemental-rules.json"
         private const val RULES_URL = "https://rules2.clearurls.xyz/data.min.json"
     }
 }

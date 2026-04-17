@@ -9,7 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-enum class ShareMode { ClipboardOnly, ReShare, Both }
+enum class ShareMode { ClipboardOnly, ReShare }
 
 data class Settings(
     val shareMode: ShareMode,

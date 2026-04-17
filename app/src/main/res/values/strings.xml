@@ -22,9 +22,8 @@
     <string name="history">歷史</string>
 
     <string name="section_share_behavior">分享進來時的行為</string>
-    <string name="mode_clipboard_only">放剪貼簿（預設）</string>
-    <string name="mode_reshare">放剪貼簿並再分享</string>
-    <string name="mode_both">放剪貼簿並再分享（兩者都做）</string>
+    <string name="mode_clipboard_only">只放剪貼簿（預設）</string>
+    <string name="mode_reshare">放剪貼簿並開啟分享選單</string>
 
     <string name="section_privacy">隱私</string>
     <string name="toggle_history">記錄歷史</string>

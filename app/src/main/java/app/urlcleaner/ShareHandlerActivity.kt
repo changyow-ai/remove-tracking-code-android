@@ -52,7 +52,7 @@ class ShareHandlerActivity : ComponentActivity() {
             } else {
                 ShareActions.copyToClipboard(ctx, result.cleaned)
                 ShareActions.toastAfterCleaning(ctx, result.paramsRemoved, isBlocked = false)
-                if (settings.shareMode == ShareMode.ReShare || settings.shareMode == ShareMode.Both) {
+                if (settings.shareMode == ShareMode.ReShare) {
                     ShareActions.reShare(ctx, result.cleaned, excludeSelf = true)
                 }
             }

@@ -83,7 +83,6 @@ fun SettingsScreen(viewModel: MainViewModel, onBack: () -> Unit) {
                 val label = when (mode) {
                     ShareMode.ClipboardOnly -> stringResource(R.string.mode_clipboard_only)
                     ShareMode.ReShare -> stringResource(R.string.mode_reshare)
-                    ShareMode.Both -> stringResource(R.string.mode_both)
                 }
                 Row(
                     Modifier
