@@ -1,0 +1,20 @@
+URL Tracker Remover
+===================
+
+This application embeds and uses rule data from the ClearURLs project to
+identify tracking parameters in URLs.
+
+ClearURLs rules (app/src/main/assets/clearurls-rules.json)
+----------------------------------------------------------
+  Source:  https://gitlab.com/ClearURLs/Rules
+  Upstream file: https://rules2.clearurls.xyz/data.min.json
+  License: GNU Lesser General Public License v3.0 (LGPL-3.0)
+
+The bundled rules file is distributed under LGPL-3.0. The application code
+in this repository is distributed under the MIT License (see LICENSE). These
+two components are distributed together under their respective licenses; the
+rules file is a data asset and is not statically linked into the application
+code.
+
+Full text of the LGPL-3.0 license is available at:
+  https://www.gnu.org/licenses/lgpl-3.0.html
