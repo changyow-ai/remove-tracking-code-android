@@ -13,6 +13,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Signing creds default to the committed public keystore (see app/build.gradle.kts).
+    # If a fork sets these secrets, the Gradle build picks them up via System.getenv().
+    # Unset secrets expand to "" which the build intentionally ignores.
     env:
       URLCLEANER_KEYSTORE_PASSWORD: ${{ secrets.URLCLEANER_KEYSTORE_PASSWORD }}
       URLCLEANER_KEY_ALIAS: ${{ secrets.URLCLEANER_KEY_ALIAS }}

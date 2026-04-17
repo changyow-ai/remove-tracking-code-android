@@ -8,11 +8,15 @@ plugins {
 
 // The repo ships a public self-signed keystore at app/signing/release.jks so that
 // CI can produce a signed APK without any secrets. Env vars override the
-// committed defaults so forks / CI can plug in their own credentials.
+// committed defaults so forks / CI can plug in their own credentials. Blank env
+// values (e.g. GitHub Actions expanding an unset secret to "") are ignored so
+// they don't clobber the working defaults.
 val releaseKeystore = rootProject.file("app/signing/release.jks")
-val releaseStorePassword = System.getenv("URLCLEANER_KEYSTORE_PASSWORD") ?: "urlcleaner"
-val releaseKeyAlias = System.getenv("URLCLEANER_KEY_ALIAS") ?: "urlcleaner"
-val releaseKeyPassword = System.getenv("URLCLEANER_KEY_PASSWORD") ?: "urlcleaner"
+fun envOrDefault(name: String, default: String): String =
+    System.getenv(name)?.takeUnless { it.isBlank() } ?: default
+val releaseStorePassword = envOrDefault("URLCLEANER_KEYSTORE_PASSWORD", "urlcleaner")
+val releaseKeyAlias = envOrDefault("URLCLEANER_KEY_ALIAS", "urlcleaner")
+val releaseKeyPassword = envOrDefault("URLCLEANER_KEY_PASSWORD", "urlcleaner")
 
 android {
     namespace = "app.urlcleaner"
