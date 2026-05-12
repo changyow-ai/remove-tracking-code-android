@@ -142,6 +142,65 @@ class UrlCleanerTest {
         assertTrue("expected >=1 removals, got ${r.paramsRemoved}", r.paramsRemoved >= 1)
     }
 
+    @Test fun `cleans yahoo news guce consent params`() {
+        val r = cleaner.clean("https://tw.news.yahoo.com/article-title-123.html?guccounter=1&guce_referrer=aHR0cHM6Ly9leGFtcGxlLmNvbQ&guce_referrer_sig=AQAAA")
+        assertEquals("https://tw.news.yahoo.com/article-title-123.html", r.cleaned)
+        assertTrue(r.wasChanged)
+    }
+
+    @Test fun `cleans yahoo soc_src and ncid`() {
+        val r = cleaner.clean("https://news.yahoo.com/some-article.html?soc_src=social-sh&soc_trk=tw&ncid=txtlnkusaolp00000058")
+        assertEquals("https://news.yahoo.com/some-article.html", r.cleaned)
+    }
+
+    @Test fun `cleans yahoo dot-tsrc`() {
+        val r = cleaner.clean("https://finance.yahoo.com/news/foo.html?.tsrc=fin-srch")
+        assertEquals("https://finance.yahoo.com/news/foo.html", r.cleaned)
+    }
+
+    @Test fun `cleans engadget guccounter`() {
+        val r = cleaner.clean("https://www.engadget.com/some-post-120000123.html?guccounter=1")
+        assertEquals("https://www.engadget.com/some-post-120000123.html", r.cleaned)
+    }
+
+    @Test fun `cleans bbc at_medium and at_campaign`() {
+        val r = cleaner.clean("https://www.bbc.com/news/articles/abc123?at_medium=custom7&at_campaign=64&at_custom1=part&keep=yes")
+        assertTrue(r.cleaned.contains("keep=yes"))
+        assertFalse(r.cleaned.contains("at_medium"))
+        assertFalse(r.cleaned.contains("at_campaign"))
+        assertFalse(r.cleaned.contains("at_custom1"))
+    }
+
+    @Test fun `cleans daily mail ito`() {
+        val r = cleaner.clean("https://www.dailymail.co.uk/news/article-12345/headline.html?ito=social-facebook_news&keep=1")
+        assertTrue(r.cleaned.contains("keep=1"))
+        assertFalse(r.cleaned.contains("ito="))
+    }
+
+    @Test fun `cleans nyt smid and smtyp`() {
+        val r = cleaner.clean("https://www.nytimes.com/2024/01/01/world/article.html?smid=tw-share&smtyp=cur")
+        assertEquals("https://www.nytimes.com/2024/01/01/world/article.html", r.cleaned)
+    }
+
+    @Test fun `cleans xtor at-internet tracker`() {
+        val r = cleaner.clean("https://www.example-news.fr/article?xtor=RSS-200&keep=2")
+        assertTrue(r.cleaned.contains("keep=2"))
+        assertFalse(r.cleaned.contains("xtor="))
+    }
+
+    @Test fun `cleans webtrends WT dotted params`() {
+        val r = cleaner.clean("https://www.example.com/page?WT.mc_id=email&WT.tsrc=newsletter&keep=ok")
+        assertTrue(r.cleaned.contains("keep=ok"))
+        assertFalse("WT.mc_id leaked: ${r.cleaned}", r.cleaned.contains("WT.mc_id"))
+        assertFalse(r.cleaned.contains("WT.tsrc"))
+    }
+
+    @Test fun `cleans intcmp internal campaign`() {
+        val r = cleaner.clean("https://www.bloomberg.com/news/articles/2024-01-01/foo?intcmp=storyline&keep=1")
+        assertTrue(r.cleaned.contains("keep=1"))
+        assertFalse(r.cleaned.contains("intcmp"))
+    }
+
     companion object {
         private lateinit var ruleSet: RuleSet
         private lateinit var cleaner: UrlCleaner

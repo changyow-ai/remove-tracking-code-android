@@ -9,6 +9,65 @@
       "exceptions": [],
       "redirections": [],
       "forceRedirection": false
+    },
+    "yahoo": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:yahoo\\.[a-z.]+|engadget\\.com|aol\\.com|huffpost\\.com|rivals\\.com)",
+      "completeProvider": false,
+      "rules": [
+        "guccounter",
+        "guce_referrer",
+        "guce_referrer_sig",
+        "_guc_consent_skip",
+        "soc_src",
+        "soc_trk",
+        "ncid",
+        "\\.tsrc",
+        "tsrc",
+        "yptr"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "supplementalGlobalRules": {
+      "urlPattern": ".*",
+      "completeProvider": false,
+      "rules": [
+        "xtor",
+        "ito",
+        "at_medium",
+        "at_campaign",
+        "at_custom[1-4]",
+        "WT\\.[a-z_]+",
+        "wt_mc(?:_[a-z_]+)?",
+        "intcmp",
+        "smid",
+        "smtyp",
+        "stm_source",
+        "stm_medium",
+        "stm_campaign",
+        "share_id",
+        "share_token",
+        "pk_campaign",
+        "pk_kwd",
+        "pk_source",
+        "pk_medium",
+        "piwik_campaign",
+        "piwik_kwd",
+        "scid",
+        "rss_source",
+        "feed_source",
+        "from_source",
+        "trackingId",
+        "tracking_id"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
     }
   }
 }
