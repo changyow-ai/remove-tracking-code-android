@@ -201,6 +201,101 @@ class UrlCleanerTest {
         assertFalse(r.cleaned.contains("intcmp"))
     }
 
+    @Test fun `cleans tw udn from`() {
+        val r = cleaner.clean("https://udn.com/news/story/7314/8888888?from=udn-ch1003_breaknews")
+        assertEquals("https://udn.com/news/story/7314/8888888", r.cleaned)
+    }
+
+    @Test fun `cleans tw ettoday from and ercamp`() {
+        val r = cleaner.clean("https://www.ettoday.net/news/20240101/1234567.htm?from=fb_ettoday&ercamp=hot")
+        assertEquals("https://www.ettoday.net/news/20240101/1234567.htm", r.cleaned)
+    }
+
+    @Test fun `cleans chinatimes chdtv and ctrss`() {
+        val r = cleaner.clean("https://www.chinatimes.com/realtimenews/20240101001234-260407?chdtv&ctrss=01")
+        assertEquals("https://www.chinatimes.com/realtimenews/20240101001234-260407", r.cleaned)
+    }
+
+    @Test fun `cleans wsj mod and st`() {
+        val r = cleaner.clean("https://www.wsj.com/articles/foo-bar-12345?mod=Searchresults_pos1&st=mystory")
+        assertEquals("https://www.wsj.com/articles/foo-bar-12345", r.cleaned)
+    }
+
+    @Test fun `cleans wapo itid and wpisrc`() {
+        val r = cleaner.clean("https://www.washingtonpost.com/world/2024/01/01/foo/?itid=hp_top_table_main&wpisrc=nl_daily202")
+        assertEquals("https://www.washingtonpost.com/world/2024/01/01/foo/", r.cleaned)
+    }
+
+    @Test fun `cleans bloomberg leadSource and sref`() {
+        val r = cleaner.clean("https://www.bloomberg.com/news/articles/2024-01-01/foo?leadSource=uverify&sref=abc")
+        assertEquals("https://www.bloomberg.com/news/articles/2024-01-01/foo", r.cleaned)
+    }
+
+    @Test fun `cleans ft segmentid`() {
+        val r = cleaner.clean("https://www.ft.com/content/abc-123?segmentid=1234&shareType=enterprise")
+        assertEquals("https://www.ft.com/content/abc-123", r.cleaned)
+    }
+
+    @Test fun `cleans substack r and s`() {
+        val r = cleaner.clean("https://someone.substack.com/p/article-name?r=abc123&s=w")
+        assertEquals("https://someone.substack.com/p/article-name", r.cleaned)
+    }
+
+    @Test fun `cleans pinterest invite_code`() {
+        val r = cleaner.clean("https://www.pinterest.com/pin/123456/?invite_code=abc&sender=999&nic_v2=1")
+        assertEquals("https://www.pinterest.com/pin/123456/", r.cleaned)
+    }
+
+    @Test fun `cleans sina wm and tj`() {
+        val r = cleaner.clean("https://news.sina.com.cn/c/2024-01-01/doc-abc.shtml?wm=3049_0015&tj=cxvertical")
+        assertEquals("https://news.sina.com.cn/c/2024-01-01/doc-abc.shtml", r.cleaned)
+    }
+
+    @Test fun `cleans 163 clickfrom`() {
+        val r = cleaner.clean("https://www.163.com/news/article/abc.html?clickfrom=w_index_xinwen&f=xc")
+        assertEquals("https://www.163.com/news/article/abc.html", r.cleaned)
+    }
+
+    @Test fun `cleans douyin sec_uid and share params`() {
+        val r = cleaner.clean("https://www.douyin.com/video/12345?sec_uid=ABC&u_code=99&did=111&iid=222&share_app_name=douyin")
+        assertEquals("https://www.douyin.com/video/12345", r.cleaned)
+    }
+
+    @Test fun `cleans toutiao share_iid`() {
+        val r = cleaner.clean("https://www.toutiao.com/article/12345?share_iid=abc&tt_from=weixin&wxshare_count=1")
+        assertEquals("https://www.toutiao.com/article/12345", r.cleaned)
+    }
+
+    @Test fun `cleans jd distribute_id`() {
+        val r = cleaner.clean("https://item.jd.com/12345.html?cu=true&distribute_id=abc&pinId=xyz")
+        assertEquals("https://item.jd.com/12345.html", r.cleaned)
+    }
+
+    @Test fun `cleans baijiahao from preserves id`() {
+        val r = cleaner.clean("https://baijiahao.baidu.com/s?id=1234567890&from=share&fr=spider")
+        assertEquals("https://baijiahao.baidu.com/s?id=1234567890", r.cleaned)
+    }
+
+    @Test fun `cleans zhihu utm_psn and share_text_id`() {
+        val r = cleaner.clean("https://zhuanlan.zhihu.com/p/123456?utm_psn=abc&share_text_id=xyz")
+        assertEquals("https://zhuanlan.zhihu.com/p/123456", r.cleaned)
+    }
+
+    @Test fun `cleans bilibili spm_id_from and vd_source`() {
+        val r = cleaner.clean("https://www.bilibili.com/video/BV1234567/?spm_id_from=333.999&vd_source=abcdef&share_source=copy_web")
+        assertEquals("https://www.bilibili.com/video/BV1234567/", r.cleaned)
+    }
+
+    @Test fun `cleans cnet ftag`() {
+        val r = cleaner.clean("https://www.cnet.com/tech/foo/?ftag=CAD-03-10abi2f")
+        assertEquals("https://www.cnet.com/tech/foo/", r.cleaned)
+    }
+
+    @Test fun `cleans foxnews icid and cmpid`() {
+        val r = cleaner.clean("https://www.foxnews.com/politics/x?icid=foxnews-home&cmpid=email")
+        assertEquals("https://www.foxnews.com/politics/x", r.cleaned)
+    }
+
     companion object {
         private lateinit var ruleSet: RuleSet
         private lateinit var cleaner: UrlCleaner

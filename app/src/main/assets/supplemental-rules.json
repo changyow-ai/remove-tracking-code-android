@@ -31,6 +31,406 @@
       "redirections": [],
       "forceRedirection": false
     },
+    "pinterest": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?pinterest\\.(?:com|[a-z]{2}|co\\.[a-z]{2})",
+      "completeProvider": false,
+      "rules": [
+        "invite_code",
+        "sender",
+        "nic_v[0-9]+",
+        "nic",
+        "amp_client_id",
+        "mweb_unauth_id",
+        "simplified"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "taiwanNews": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:udn\\.com|ettoday\\.net|chinatimes\\.com|ltn\\.com\\.tw|setn\\.com|ttv\\.com\\.tw|tvbs\\.com\\.tw|ftvnews\\.com\\.tw|cna\\.com\\.tw|nownews\\.com|storm\\.mg|mirrormedia\\.mg|thenewslens\\.com|gvm\\.com\\.tw|businessweekly\\.com\\.tw|cw\\.com\\.tw|businesstoday\\.com\\.tw|bnext\\.com\\.tw|ithome\\.com\\.tw|epochtimes\\.com\\.tw|nextapple\\.com|pts\\.org\\.tw|rti\\.org\\.tw|taipeitimes\\.com|taisounds\\.com|knowing\\.asia|new7\\.com\\.tw|new7\\.org\\.tw)",
+      "completeProvider": false,
+      "rules": [
+        "from",
+        "ercamp",
+        "ctrss",
+        "chdtv",
+        "fb_action_ids",
+        "fb_action_types"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "wsj": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?wsj\\.com",
+      "completeProvider": false,
+      "rules": [
+        "mod",
+        "st",
+        "reflink",
+        "cx_(?:nav|adset|campaign|content|creative|tag)"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "washingtonPost": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?washingtonpost\\.com",
+      "completeProvider": false,
+      "rules": [
+        "itid",
+        "wpisrc",
+        "wpmk",
+        "tid",
+        "no_nav",
+        "pwapi_token"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "bloomberg": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?bloomberg\\.com",
+      "completeProvider": false,
+      "rules": [
+        "leadSource",
+        "sref",
+        "srnd",
+        "embedded-checkout",
+        "in_source",
+        "intcmp"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "ft": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?ft\\.com",
+      "completeProvider": false,
+      "rules": [
+        "segmentid",
+        "shareType"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "substack": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?substack\\.com",
+      "completeProvider": false,
+      "rules": [
+        "r",
+        "s",
+        "publication_id",
+        "post_id",
+        "isFreemail"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "cnn": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?cnn\\.com",
+      "completeProvider": false,
+      "rules": [
+        "hpt",
+        "iid",
+        "cid"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "newsCorporate": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:nbcnews\\.com|foxnews\\.com|cbsnews\\.com|usatoday\\.com|latimes\\.com|nypost\\.com|chicagotribune\\.com|sfgate\\.com|seattletimes\\.com|nydailynews\\.com|denverpost\\.com)",
+      "completeProvider": false,
+      "rules": [
+        "icid",
+        "ocid",
+        "cmpid",
+        "gnt-cfr",
+        "itm_source",
+        "itm_medium",
+        "itm_campaign",
+        "itm_content",
+        "itm_term"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "ukNews": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:telegraph\\.co\\.uk|independent\\.co\\.uk|express\\.co\\.uk|thesun\\.co\\.uk|metro\\.co\\.uk|standard\\.co\\.uk|mirror\\.co\\.uk|dailymail\\.co\\.uk|thisismoney\\.co\\.uk)",
+      "completeProvider": false,
+      "rules": [
+        "ito",
+        "ns_campaign",
+        "ns_mchannel",
+        "ns_source",
+        "ns_linkname",
+        "ns_fee",
+        "ICID",
+        "spJobID",
+        "spReportId",
+        "spUserID",
+        "spMailingID"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "techMedia": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:theverge\\.com|arstechnica\\.com|gizmodo\\.com|mashable\\.com|venturebeat\\.com|cnet\\.com|zdnet\\.com|theregister\\.com|theregister\\.co\\.uk|9to5mac\\.com|9to5google\\.com|androidcentral\\.com|androidauthority\\.com|tomshardware\\.com|anandtech\\.com)",
+      "completeProvider": false,
+      "rules": [
+        "ftag",
+        "scrolla"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "sina": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:sina\\.com\\.cn|sina\\.cn|sina\\.com|weibo\\.cn)",
+      "completeProvider": false,
+      "rules": [
+        "from",
+        "wm",
+        "wfr",
+        "tj",
+        "tr",
+        "cre",
+        "loc",
+        "rfunc",
+        "valid"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "netease": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?163\\.com",
+      "completeProvider": false,
+      "rules": [
+        "clickfrom",
+        "referFrom",
+        "f"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "tencent": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?qq\\.com",
+      "completeProvider": false,
+      "rules": [
+        "ADUIN",
+        "ADSESSION",
+        "ADTAG",
+        "ADPUBNO",
+        "pgv_ref",
+        "pgv_source",
+        "from",
+        "ptlang",
+        "chid"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "ifeng": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?ifeng\\.com",
+      "completeProvider": false,
+      "rules": [
+        "_zbs_[a-z0-9_]+",
+        "qpid",
+        "from"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "toutiao": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:toutiao\\.com|toutiao\\.io)",
+      "completeProvider": false,
+      "rules": [
+        "share_iid",
+        "is_share",
+        "tt_from",
+        "wxshare_count",
+        "share_token",
+        "share_app_name",
+        "u_code",
+        "timestamp_share_id"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "douyin": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:douyin\\.com|iesdouyin\\.com)",
+      "completeProvider": false,
+      "rules": [
+        "share_app_name",
+        "share_iid",
+        "u_code",
+        "did",
+        "iid",
+        "with_sec_did",
+        "sec_uid",
+        "enter_from_merge",
+        "enter_method",
+        "share_token",
+        "tt_from",
+        "share_link_id",
+        "preview_pb",
+        "checksum"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "jd": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?jd\\.com",
+      "completeProvider": false,
+      "rules": [
+        "cu",
+        "distribute_id",
+        "inviteCode",
+        "pinId",
+        "enc",
+        "from",
+        "csa_pid",
+        "ad_od",
+        "Trace_Push"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "baijiahao": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:baijiahao\\.baidu\\.com|haokan\\.baidu\\.com|mbd\\.baidu\\.com)",
+      "completeProvider": false,
+      "rules": [
+        "from",
+        "fr",
+        "sourceFrom",
+        "ssid",
+        "channel",
+        "card_type"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "zhihu": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?zhihu\\.com",
+      "completeProvider": false,
+      "rules": [
+        "utm_psn",
+        "utm_oi",
+        "utm_divison",
+        "share_text_id",
+        "share_open_app",
+        "share_session_id",
+        "ne_p",
+        "ne_position",
+        "ne_position_code",
+        "from"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "chinaTech": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?(?:36kr\\.com|huxiu\\.com|csdn\\.net|cnblogs\\.com|jianshu\\.com|smzdm\\.com|hupu\\.com|sspai\\.com|thepaper\\.cn|guancha\\.cn|caixin\\.com)",
+      "completeProvider": false,
+      "rules": [
+        "from",
+        "share_token",
+        "shareToken",
+        "share_id",
+        "share_session_id",
+        "ftag",
+        "spm",
+        "share_source",
+        "share_medium",
+        "share_plat",
+        "share_tag"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
+    "bilibiliExtras": {
+      "urlPattern": "^https?://(?:[a-z0-9-]+\\.)*?bilibili\\.com",
+      "completeProvider": false,
+      "rules": [
+        "spm_id_from",
+        "vd_source",
+        "share_source",
+        "share_medium",
+        "share_plat",
+        "share_session_id",
+        "share_tag",
+        "bbid",
+        "ts",
+        "unique_k",
+        "from_spmid",
+        "buvid",
+        "broadcast_type",
+        "is_room_feed",
+        "share_from"
+      ],
+      "referralMarketing": [],
+      "rawRules": [],
+      "exceptions": [],
+      "redirections": [],
+      "forceRedirection": false
+    },
     "supplementalGlobalRules": {
       "urlPattern": ".*",
       "completeProvider": false,
