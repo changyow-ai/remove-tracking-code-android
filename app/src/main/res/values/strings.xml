@@ -49,4 +49,23 @@
     <string name="history_empty">還沒有紀錄。將 URL 分享到這個 app、或在主畫面貼上後，會出現在這裡。</string>
 
     <string name="toast_no_url_in_share">沒有偵測到 URL</string>
+
+    <!-- Clipboard watcher settings -->
+    <string name="section_clipboard_watch">剪貼簿監看</string>
+    <string name="watch_mode_off">不自動監測（預設）</string>
+    <string name="watch_mode_auto">自動修改剪貼簿</string>
+    <string name="watch_mode_ask">監測但詢問（泡泡按鈕）</string>
+    <string name="watch_mode_auto_sub">偵測到含追蹤碼的 URL 時，靜默覆寫並顯示提示。</string>
+    <string name="watch_mode_ask_sub">偵測到含追蹤碼的 URL 時，顯示懸浮按鈕。點擊清理，滑動取消。長按可拖移位置。</string>
+
+    <!-- Accessibility service metadata -->
+    <string name="a11y_service_description">僅用於在背景讀取剪貼簿以移除 URL 追蹤碼，不讀取螢幕內容。</string>
+    <string name="a11y_service_summary">URL 清道夫 — 剪貼簿追蹤碼移除</string>
+
+    <!-- Permission warnings in Settings -->
+    <string name="warn_a11y_disabled">需要無障礙權限才能在背景監看剪貼簿</string>
+    <string name="btn_open_a11y_settings">前往無障礙設定</string>
+    <string name="warn_overlay_disabled">需要「在其他應用程式上方顯示」權限才能顯示懸浮按鈕</string>
+    <string name="btn_open_overlay_settings">前往顯示設定</string>
+    <string name="toast_url_cleaned">已清理 URL 追蹤碼</string>
 </resources>

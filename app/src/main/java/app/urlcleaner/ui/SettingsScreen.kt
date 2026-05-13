@@ -32,9 +32,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.widget.Toast
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import app.urlcleaner.R
+import app.urlcleaner.clipboard.ClipboardWatchMode
+import app.urlcleaner.clipboard.ClipboardWatcherService
 import app.urlcleaner.data.ShareMode
 import java.text.DateFormat
 import java.util.Date
@@ -118,6 +136,92 @@ fun SettingsScreen(viewModel: MainViewModel, onBack: () -> Unit) {
 
             HorizontalDivider()
 
+            // ── Clipboard watch ──────────────────────────────────────────────
+            var a11yEnabled by remember { mutableStateOf(ClipboardWatcherService.isEnabled(ctx)) }
+            var overlayEnabled by remember { mutableStateOf(Settings.canDrawOverlays(ctx)) }
+
+            val lifecycle = LocalLifecycleOwner.current.lifecycle
+            DisposableEffect(lifecycle) {
+                val obs = LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_RESUME) {
+                        a11yEnabled = ClipboardWatcherService.isEnabled(ctx)
+                        overlayEnabled = Settings.canDrawOverlays(ctx)
+                    }
+                }
+                lifecycle.addObserver(obs)
+                onDispose { lifecycle.removeObserver(obs) }
+            }
+
+            SectionHeader(stringResource(R.string.section_clipboard_watch))
+            ClipboardWatchMode.entries.forEach { mode ->
+                val (label, sub) = when (mode) {
+                    ClipboardWatchMode.OFF -> Pair(
+                        stringResource(R.string.watch_mode_off), null
+                    )
+                    ClipboardWatchMode.AUTO_CLEAN -> Pair(
+                        stringResource(R.string.watch_mode_auto),
+                        stringResource(R.string.watch_mode_auto_sub),
+                    )
+                    ClipboardWatchMode.ASK -> Pair(
+                        stringResource(R.string.watch_mode_ask),
+                        stringResource(R.string.watch_mode_ask_sub),
+                    )
+                }
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = (s.clipboardWatchMode == mode),
+                            onClick = { viewModel.setClipboardWatchMode(mode) },
+                        )
+                        .padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.Top,
+                ) {
+                    RadioButton(
+                        selected = (s.clipboardWatchMode == mode),
+                        onClick = { viewModel.setClipboardWatchMode(mode) },
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Column {
+                        Text(label)
+                        if (sub != null) {
+                            Text(
+                                sub,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Permission warnings
+            if (s.clipboardWatchMode != ClipboardWatchMode.OFF) {
+                if (!a11yEnabled) {
+                    PermissionWarningCard(
+                        message = stringResource(R.string.warn_a11y_disabled),
+                        buttonLabel = stringResource(R.string.btn_open_a11y_settings),
+                        onClick = { ctx.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) },
+                    )
+                }
+                if (s.clipboardWatchMode == ClipboardWatchMode.ASK && !overlayEnabled) {
+                    PermissionWarningCard(
+                        message = stringResource(R.string.warn_overlay_disabled),
+                        buttonLabel = stringResource(R.string.btn_open_overlay_settings),
+                        onClick = {
+                            ctx.startActivity(
+                                Intent(
+                                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    Uri.parse("package:${ctx.packageName}"),
+                                )
+                            )
+                        },
+                    )
+                }
+            }
+
+            HorizontalDivider()
+
             SectionHeader(stringResource(R.string.section_rules))
             Text(
                 when {
@@ -145,6 +249,32 @@ fun SettingsScreen(viewModel: MainViewModel, onBack: () -> Unit) {
 @Composable
 private fun SectionHeader(text: String) {
     Text(text, style = MaterialTheme.typography.titleMedium)
+}
+
+@Composable
+private fun PermissionWarningCard(message: String, buttonLabel: String, onClick: () -> Unit) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+        ),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(
+                message,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onErrorContainer,
+            )
+            OutlinedButton(
+                onClick = onClick,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                ),
+            ) {
+                Text(buttonLabel)
+            }
+        }
+    }
 }
 
 @Composable

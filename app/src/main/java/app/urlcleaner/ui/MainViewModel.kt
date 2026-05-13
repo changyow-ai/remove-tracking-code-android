@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import app.urlcleaner.app
 import app.urlcleaner.cleaner.UrlCleaner
+import app.urlcleaner.clipboard.ClipboardWatchMode
 import app.urlcleaner.data.HistoryEntry
 import app.urlcleaner.data.RulesRepository
 import app.urlcleaner.data.Settings
@@ -103,4 +104,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun dismissUpdateStatus() { _updateStatus.value = null }
+
+    fun setClipboardWatchMode(mode: ClipboardWatchMode) = viewModelScope.launch {
+        appCtx.settingsRepo.setClipboardWatchMode(mode)
+    }
 }
